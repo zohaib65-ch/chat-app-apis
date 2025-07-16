@@ -1,10 +1,10 @@
-import amqp from "amqplib";
+import amql from "amqplib";
 
-let channel: amqp.Channel;
+let channel: amql.Channel;
 
 export const connectRabbitMQ = async () => {
   try {
-    const connection = await amqp.connect({
+    const connection = await amql.connect({
       protocol: "amqp",
       hostname: process.env.Rabbitmq_host,
       port: 5672,
