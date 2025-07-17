@@ -1,11 +1,11 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-export interface IUser extends Document {
+export interface User extends Document {
   name: string;
   email: string;
 }
 
-const schema: Schema<IUser> = new Schema(
+const schema: Schema<User> = new Schema(
   {
     name: {
       type: String,
@@ -22,4 +22,4 @@ const schema: Schema<IUser> = new Schema(
   }
 );
 
-export default mongoose.model<IUser>('User', schema);
+export default mongoose.model<User>('User', schema);

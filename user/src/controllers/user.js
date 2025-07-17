@@ -17,7 +17,6 @@ const index_1 = require("../index");
 const TryCatch_1 = __importDefault(require("../config/TryCatch"));
 const rabbitmq_1 = require("../config/rabbitmq");
 exports.loginUser = (0, TryCatch_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({ message: "Login route hit" });
     const { email } = req.body;
     const rateLimitKey = `otp:ratelimit:${email}`;
     const ratelimit = yield index_1.redisClient.get(rateLimitKey);
@@ -37,7 +36,7 @@ exports.loginUser = (0, TryCatch_1.default)((req, res) => __awaiter(void 0, void
     });
     const message = {
         to: email,
-        subject: "Your otp code",
+        subject: "Your OTP code",
         body: `Your OTP is ${otp}. It is valid for 5 minutes`,
     };
     yield (0, rabbitmq_1.publishToQueue)("send-otp", message),

@@ -1,11 +1,9 @@
 import express from "express";
-import { loginUser } from "../controllers/user.js"; // ✅ has .js extension
-
+import { loginUser, verifyUser } from "../controllers/user.js"; 
 const router = express.Router();
 
 router.post("/login", loginUser);
-router.get("/ping", (_req, res) => {
-  res.send("Hello, world!");
-});
+router.post("/verify", verifyUser);
+
 
 export default router;
