@@ -5,6 +5,9 @@ import User from "../model/user.js";
 
 export interface AuthenticatedRequest extends Request {
   user?: IUser | null;
+  body: {
+    name?: string;
+  };
 }
 
 export const isAuth = async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> => {
@@ -18,9 +21,9 @@ export const isAuth = async (req: AuthenticatedRequest, res: Response, next: Nex
 
     const token = authHeader.split(" ")[1];
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload
+    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as JwtPayload;
 
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decoded.user._id);
     if (!user) {
       res.status(401).json({ message: "Unauthorized: User not found" });
       return;
